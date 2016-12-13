@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <meta name="description" content="Alexya Framework, the intelligent Loli Framework for PHP 7">
+    <meta name="keywords" content="alexya,framework,php,php7,hmvc,mvc,orm,library,hmvvmc,mvvmc,manulaiko">
+    <meta name="author" content="Manulaiko">
+
+    <title>Alexya Framework - DOM</title>
+
+    <!-- Styles -->
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+    <link href="../css/bootstrap-responsive.css" rel="stylesheet">
+    <link href="../css/style.css" rel="stylesheet">
+    <link href="../css/font-awesome.css" rel="stylesheet">
+    <link href="../css/css.css" rel="stylesheet" type="text/css">
+    <link href="../css/prettify.css" rel="stylesheet">
+    <!--[if IE]>
+        <link href="http://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet" type="text/css">
+        <link href="http://fonts.googleapis.com/css?family=Open+Sans:300italic" rel="stylesheet" type="text/css">
+        <link href="http://fonts.googleapis.com/css?family=Open+Sans:400italic" rel="stylesheet" type="text/css">
+        <link href="http://fonts.googleapis.com/css?family=Open+Sans:600italic" rel="stylesheet" type="text/css">
+        <link href="http://fonts.googleapis.com/css?family=Open+Sans:700italic" rel="stylesheet" type="text/css">
+        <link href="http://fonts.googleapis.com/css?family=Open+Sans:300" rel="stylesheet" type="text/css">
+        <link href="http://fonts.googleapis.com/css?family=Open+Sans:400" rel="stylesheet" type="text/css">
+        <link href="http://fonts.googleapis.com/css?family=Open+Sans:600" rel="stylesheet" type="text/css">
+        <link href="http://fonts.googleapis.com/css?family=Bree+Serif:400" rel="stylesheet" type="text/css">
+    <![endif]-->
+        <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+        <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+</head>
+<body>
+    <header class="masthead">
+        <nav class="navbar navbar-inverse navbar--top">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                </div>
+                <div id="navbar" class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        <li><a href="../index.html">Home</a></li>
+                        <li><a href="../features.html">Features</a></li>
+                        <li class="active"><a href="index.html">Documentation</a></li>
+                        <li><a href="../examples/index.html">Examples</a></li>
+                        <li><a href="../changelog.html">Changelog</a></li>
+                        <li><a href="https://github.com/manulaiko/alexya/releases">Downloads</a></li>
+                    </ul>
+                </div><!--/.navbar-collapse -->
+            </div>
+        </nav>
+        <div class="container">
+            <h1 class="font-bree-serif">Alexya Framework</h1>
+            <p class="font-open-sans-normal">The intelligent Loli Framework</p>
+        </div><!--end container-->  
+    </header>
+    <div class="main-content">
+        <div class="container">
+            <div class="row" id="content">
+                <div class="span12">
+                    <section class="sec-header">
+                        <h3 class="font-bree-serif">Documentation</h3>
+                        <div class="row">
+                            <div class="span3">
+                                <div class="well">
+                                    <ul class="nav nav-pills nav-stacked">
+                                        <li><a href="configuration.html">Configuration</a></li>
+                                        <li><a href="hmvvmc/index.html">HMV(VM)C</a></li>
+                                        <li><a href="database/index.html">Database</a></li>
+                                        <li class="active"><a href="dom.html">DOM generation</a></li>
+                                        <li><a href="event_dispatcher.html">Event dispatcher</a></li>
+                                        <li><a href="filesystem/index.html">File system</a></li>
+                                        <li><a href="autoloader.html">Autoloader</a></li>
+                                        <li><a href="http/index.html">HTTP</a></li>
+                                        <li><a href="locale/index.html">Localization</a></li>
+                                        <li><a href="router.html">Router</a></li>
+                                        <li><a href="sockswork/index.html">SocksWork</a></li>
+                                        <li><a href="ajax.html">Ajax</a></li>
+                                        <li><a href="logger.html">Logger</a></li>
+                                        <li><a href="security.html">Security</a></li>
+                                        <li><a href="session.html">Session</a></li>
+                                        <li><a href="results.html">Results</a></li>
+                                        <li><a href="upload.html">File upload</a></li>
+                                        <li><a href="validator.html">Validator</a></li>
+                                        <li><a href="functions.html">Other functions</a></li>
+                                    </ul>
+                                </div><!--end well-->
+                            </div><!--end span3-->
+                            <div class="span9">
+                                <p>
+                                    Alexya lets you generate HTML and CSS easily with the classes located under the package <i>\Alexya\DOM</i>.
+                                </p>
+                                <h3>HTML</h3>
+                                <p>
+                                    The class <i>\Alexya\DOM\Tag</i> provides an easy way to generate HTML code with a OOP interface in PHP. You can extend this class to add more tags.
+                                </p>
+                                <p>
+                                    Method summary:<br/>
+                                    <table class="table table-bordered settings">
+                                    <thead>
+                                    <tr>
+                                        <td>Name</td>
+                                        <td>Parameters</td>
+                                        <td>Return value</td>
+                                        <td>Description</td>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td>addChild</td>
+                                        <td>array|Tag <i>$tag</i>: Tag (or tags) to add.</td>
+                                        <td>void</td>
+                                        <td>
+                                            Adds a child tag.<br/>
+                                            The parameter can be an object of type Tag or an array containing numerous objects of type Tag.
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>parseAttributes</td>
+                                        <td></td>
+                                        <td>string</td>
+                                        <td>
+                                            Parses and returns tag's attributes.
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>fetch</td>
+                                        <td></td>
+                                        <td>string</td>
+                                        <td>
+                                            Renders the tag and all its children tags.
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>render</td>
+                                        <td></td>
+                                        <td>void</td>
+                                        <td>
+                                            Renders the tag and all its children tags and prints the result.
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>addClass</td>
+                                        <td>string <i>$class</i>: Class to add.</td>
+                                        <td>void</td>
+                                        <td>
+                                            Adds a class to the tag.
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>removeClass</td>
+                                        <td>string <i>$class</i>: Class to remove.</td>
+                                        <td>void</td>
+                                        <td>
+                                            Removes a class from the tag.
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>__set</td>
+                                        <td>
+                                            string <i>$attribute</i>: Attribute name.<br/>
+                                            string|array <i>$value</i>: Attribute value(s).
+                                        </td>
+                                        <td>void</td>
+                                        <td>
+                                            Adds an attribute to the tag.
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>__get</td>
+                                        <td>
+                                            string <i>$attribute</i>: Attribute name.
+                                        </td>
+                                        <td>string|array</td>
+                                        <td>
+                                            Returns an attribute from the tag.
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                    </table>
+                                    Properties summary:<br/>
+                                    <table class="table table-bordered settings">
+                                    <thead>
+                                    <tr>
+                                        <td>Name</td>
+                                        <td>Type</td>
+                                        <td>Visibility</td>
+                                        <td>Description</td>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td>_childs</td>
+                                        <td>array</td>
+                                        <td>Protected</td>
+                                        <td>
+                                            Contains all children tags.
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>_name</td>
+                                        <td>string</td>
+                                        <td>Protected</td>
+                                        <td>
+                                            Tag name.
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>_attributes</td>
+                                        <td>array</td>
+                                        <td>Protected</td>
+                                        <td>
+                                            Tag attributes.
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>_isSelfClosing</td>
+                                        <td>boolean</td>
+                                        <td>Protected</td>
+                                        <td>
+                                            Wether the tag is self closing or not.
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>innerHTML</td>
+                                        <td>string</td>
+                                        <td>Public</td>
+                                        <td>
+                                            Tag's inner HTML.
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                    </table>
+                                </p>
+                                <p>
+                                    The constructor accepts as parameter the tag name as a string and an associative array containing attributes.<br/>
+                                    To render the tag and all its child tags use the method <i>\Alexya\DOM\Tag::render</i><br/>
+                                    To add a child to this tag use the method  <i>\Alexya\DOM\Tag::addChild</i><br/>
+                                    To add raw HTML to the tag change the variable <i>innerHTML</i><br/>
+                                    Example:<br/>
+                                    <br/>
+                                    <pre class="prettyprint">
+$html = new \Alexya\DOM\Tag("html", [
+    "lang" =&gt; "en"
+]);
+$head = new \Alexya\DOM\Tag("head");
+$body = new \Alexya\DOM\Tag("body");
+
+$title = new \Alexya\DOM\Tag("title");
+$title-&gt;innerHTML = "Test";
+
+$p = new \Alexya\DOM\Tag("p");
+$p-&gt;innerHTML = "Test paragraph";
+
+$head-&gt;addChild($title);
+$body-&gt;addChild($p);
+$html-&gt;addChild([
+    $head,
+    $body
+]);
+
+$html-&gt;render();
+/**
+ * Output:
+ * &lt;html&gt;
+ *     &lt;head&gt;
+ *         &lt;title&gt;Test&lt;/title&gt;
+ *     &lt;/head&gt;
+ *     &lt;body&gt;
+ *         &lt;p&gt;Test paragraph&lt;/p&gt;
+ *     &lt;/body&gt;
+ * &lt;/html&gt;
+ */</pre>
+                                </p>
+                                <p>
+                                    A part from the <i>\Alexya\DOM\Tag</i> there are other classes for HTML generating:<br/>
+                                    <ul>
+                                        <li><i>\Alexya\DOM\Form</i></li>
+                                        <li><i>\Alexya\DOM\Image</i></li>
+                                        <li><i>\Alexya\DOM\Input</i></li>
+                                        <li><i>\Alexya\DOM\Link</i></li>
+                                        <li><i>\Alexya\DOM\List</i></li>
+                                    </ul>
+                                    Example:<br/>
+                                    <pre class="prettyprint">
+$form = new \Alexya\DOM\Form([
+    "name"   =&gt; "test_form",
+    "action" =&gt; "/Test",
+    "method" =&gt; "post",
+    "class"  =&gt; [
+        "form",
+        "form-wrapper"
+    ]
+]);
+
+$form-&gt;addChild(new \Alexya\DOM\Input([
+    "name"  =&gt; "username",
+    "type"  =&gt; "text",
+    "class" =&gt; "username_input"
+]));
+$form-&gt;addChild(new \Alexya\DOM\Input([
+    "name"  =&gt; "password",
+    "type"  =&gt; "password",
+    "class" =&gt; "password_input"
+]));
+
+$form-&gt;addChild(new \Alexya\DOM\Input([
+    "type"  =&gt; "submit",
+    "value" =&gt; "Login"
+]));
+
+$form-&gt;render();
+
+/**
+ * Output
+ *
+ * &lt;form name="test_form" action="/Test" method="post" class="form form-wrapper"&gt;
+ *     &lt;input name="username" type="text" class="username_input" /&gt;
+ *     &lt;input name="password" type="password" class="password_input" /&gt;
+ *     &lt;input type="submit" value="Login" /&gt;
+ * &lt;/form&gt;
+ */
+
+$image = new \Alexya\DOM\Image([
+    "src" =&gt; "#",
+    "alt" =&gt; "alt_title"
+]);
+
+$image-&gt;render();
+
+/**
+ * Output
+ *
+ * &lt;img src="#" alt="alt_title" /&gt;
+ */
+
+$link = new \Alexya\DOM\Link([
+    "href" =&gt; "#"
+]);
+$link-&gt;innerHTML = "Click me";
+
+$link-&gt;render();
+
+/**
+ * Output
+ *
+ * &lt;a href="#"&gt;Click me&lt;/a&gt;
+ */
+
+$list = new \Alexya\DOM\List(\Alexya\DOM\List::ORDENED_LIST);
+
+for($i = 0; $i &lt; 5; $i++) {
+    $list-&gt;addItem(new \Alexya\DOM\Link([
+        "href" =&gt; "#"
+    ]));
+}
+
+$list-&gt;render();
+
+/**
+ * Output
+ *
+ * &lt;ol&gt;
+ *     &lt;li&gt;&lt;a href="#"&gt;&lt;/a&gt;&lt;/li&gt;
+ *     &lt;li&gt;&lt;a href="#"&gt;&lt;/a&gt;&lt;/li&gt;
+ *     &lt;li&gt;&lt;a href="#"&gt;&lt;/a&gt;&lt;/li&gt;
+ *     &lt;li&gt;&lt;a href="#"&gt;&lt;/a&gt;&lt;/li&gt;
+ *     &lt;li&gt;&lt;a href="#"&gt;&lt;/a&gt;&lt;/li&gt;
+ * &lt;/ol&gt;
+ */</pre>
+                                </p>
+                                <h3>CSS</h3>
+                                <p>
+                                    The class <i>\Alexya\DOM\CSS</i> provides an OOP way for generating CSS stylesheets.
+                                </p>
+                                <p>
+                                    Method summary:<br/>
+                                    <table class="table table-bordered settings">
+                                    <thead>
+                                    <tr>
+                                        <td>Name</td>
+                                        <td>Parameters</td>
+                                        <td>Return value</td>
+                                        <td>Description</td>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td>addRule</td>
+                                        <td>
+                                            string <i>$selector</i>: Rule selector.<br/>
+                                            array <i>$content</i>: Rule content.
+                                        </td>
+                                        <td>void</td>
+                                        <td>
+                                            Adds a CSS rule.
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>deleteRule</td>
+                                        <td>string <i>$selector</i>: Rule selector</td>
+                                        <td>void</td>
+                                        <td>
+                                            Removes a CSS rule.
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>getRule</td>
+                                        <td>string <i>$selector</i>: Rule selector</td>
+                                        <td>array</td>
+                                        <td>
+                                            Returns a rule, throws a <i>\Alexya\Exceptions\NotFound</i> if <i>$selector</i> does not exist in the array.
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>fetch</td>
+                                        <td></td>
+                                        <td>string</td>
+                                        <td>
+                                            Renders the CSS.
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>render</td>
+                                        <td></td>
+                                        <td>void</td>
+                                        <td>
+                                            Renders the CSS and prints the result.
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                    </table>
+                                    Properties summary:<br/>
+                                    <table class="table table-bordered settings">
+                                    <thead>
+                                    <tr>
+                                        <td>Name</td>
+                                        <td>Type</td>
+                                        <td>Visibility</td>
+                                        <td>Description</td>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td>_rules</td>
+                                        <td>array</td>
+                                        <td>Private</td>
+                                        <td>
+                                            Contains all CSS rules.
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                    </table>
+                                </p>
+                                <p>
+                                    The method <i>\Alexya\DOM\CSS::addRule</i> lets you add a new rule, the first parameter is the CSS selector and the second parameter is an array that contains the CSS.<br/>
+                                    <br/>
+                                    The method <i>\Alexya\DOM\CSS::deleteRule</i> lets you remove a rule, the parameter is the CSS selector.<br/>
+                                    <br/>
+                                    The method <i>\Alexya\DOM\CSS::getRule</i> returns an array containing the CSS, the parameter is the selector of the rule.<br/>
+                                    The method <i>\Alexya\DOM\CSS::render</i> renders the CSS file.<br/>
+                                    Example:<br/>
+                                    <br/>
+                                    <pre class="prettyprint">
+$css = new \Alexya\DOM\CSS();
+
+$css-&gt;addRule("*", [
+    "margin"  =&gt; "0px",
+    "padding" =&gt; "0px"
+]) ;
+$css-&gt;addRule("h1", [
+    "text-decoration" =&gt; "underline",
+    "color"           =&gt; "#3c3c3c"
+]);
+
+$css-&gt;render();
+//Output:
+// * {
+//     margin: 0px;
+//     padding: 0px;
+// }
+//
+// h1 {
+//     text-decoration: "underline",;
+//     color: #3c3c3c;
+// }</pre>
+                                </p>
+                            </div><!--end span9-->
+                        </div><!--end row-->
+                    </section>
+                </div><!--end span12-->
+            </div><!--end row-->
+        </div><!--end container-->
+    </div><!--end main-content-->
+    <footer>
+        <div class="container">
+            <div class="row">
+                <p>Alexya Framework - The intelligent Loli Framework by <a href="https://github.com/manulaiko" target="_blank">Manulaiko</a></p>
+            </div><!--end row-->  
+        </div><!--end container-->  
+    </footer>
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="../js/jquery.min.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
+    <script src="../js/prettify.js"></script>
+    <script type="text/javascript" src="../js/respond.js"></script>
+    <script type="text/javascript">
+        $(function(){
+            //Load Goodle Code Pretiffy        
+            window.prettyPrint && prettyPrint();
+            //Tab function
+            $('#pluginTab a').click(function (e) {
+                e.preventDefault();
+                $(this).tab('show');
+            });
+            //FAQ autosuggest
+            $('.typeahead').typeahead();
+            //tooltip init
+            $("a.tip").tooltip();
+            //footer link to got top
+            gotoTop();
+
+            function gotoTop(){
+                // scroll body to 0px on click
+                $('a#top').on('click',function () {
+                    $('body,html').animate({
+                        scrollTop: 0
+                    }, 800);
+                    return false;
+                });
+            };
+        });
+    </script>
+</body>
+</html>

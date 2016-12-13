@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <meta name="description" content="Alexya Framework, the intelligent Loli Framework for PHP 7">
+    <meta name="keywords" content="alexya,framework,php,php7,hmvc,mvc,orm,library,hmvvmc,mvvmc,manulaiko">
+    <meta name="author" content="Manulaiko">
+
+    <title>Alexya Framework - Database Conventions</title>
+
+    <!-- Styles -->
+    <link href="../../css/bootstrap.min.css" rel="stylesheet">
+    <link href="../../css/bootstrap-responsive.css" rel="stylesheet">
+    <link href="../../css/style.css" rel="stylesheet">
+    <link href="../../css/font-awesome.css" rel="stylesheet">
+    <link href="../../css/css.css" rel="stylesheet" type="text/css">
+    <link href="../../css/prettify.css" rel="stylesheet">
+    <!--[if IE]>
+        <link href="http://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet" type="text/css">
+        <link href="http://fonts.googleapis.com/css?family=Open+Sans:300italic" rel="stylesheet" type="text/css">
+        <link href="http://fonts.googleapis.com/css?family=Open+Sans:400italic" rel="stylesheet" type="text/css">
+        <link href="http://fonts.googleapis.com/css?family=Open+Sans:600italic" rel="stylesheet" type="text/css">
+        <link href="http://fonts.googleapis.com/css?family=Open+Sans:700italic" rel="stylesheet" type="text/css">
+        <link href="http://fonts.googleapis.com/css?family=Open+Sans:300" rel="stylesheet" type="text/css">
+        <link href="http://fonts.googleapis.com/css?family=Open+Sans:400" rel="stylesheet" type="text/css">
+        <link href="http://fonts.googleapis.com/css?family=Open+Sans:600" rel="stylesheet" type="text/css">
+        <link href="http://fonts.googleapis.com/css?family=Bree+Serif:400" rel="stylesheet" type="text/css">
+    <![endif]-->
+        <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+        <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+</head>
+<body>
+    <header class="masthead">
+        <nav class="navbar navbar-inverse navbar--top">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                </div>
+                <div id="navbar" class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        <li><a href="../../index.html">Home</a></li>
+                        <li><a href="../../features.html">Features</a></li>
+                        <li class="active"><a href="../index.html">Documentation</a></li>
+                        <li><a href="../../examples/index.html">Examples</a></li>
+                        <li><a href="../../changelog.html">Changelog</a></li>
+                        <li><a href="https://github.com/manulaiko/alexya/releases">Downloads</a></li>
+                    </ul>
+                </div><!--/.navbar-collapse -->
+            </div>
+        </nav>
+        <div class="container">
+            <h1 class="font-bree-serif">Alexya Framework</h1>
+            <p class="font-open-sans-normal">The intelligent Loli Framework</p>
+        </div><!--end container-->
+    </header>
+    <div class="main-content">
+        <div class="container">
+            <div class="row" id="content">
+                <div class="span12">
+                    <section class="sec-header">
+                        <h3 class="font-bree-serif">Documentation <small>Database</small></h3>
+                        <div class="row">
+                            <div class="span3">
+                                <div class="well">
+                                    <ul class="nav nav-pills nav-stacked">
+                                        <li><a href="../configuration.html">Configuration</a></li>
+                                        <li><a href="../hmvvmc/index.html">HMV(VM)C</a></li>
+                                        <li><a href="index.html">Database</a></li>
+                                        <li>
+                                            <ul style="list-style: none; padding-top: 2px;">
+                                                <li><a href="configuration.html">Configuration</a></li>
+                                                <li><a href="conventions.html">Conventions</a></li>
+                                                <li style="background-color: #337ab7; color: #fff;"><a href="querybuilder.html" style="color: #fff;">Building Queries</a></li>
+                                                <li><a href="orm.html">ORM</a></li>
+                                            </ul>
+                                        </li>
+                                        <li><a href="../dom.html">DOM generation</a></li>
+                                        <li><a href="../event_dispatcher.html">Event dispatcher</a></li>
+                                        <li><a href="../filesystem/index.html">File system</a></li>
+                                        <li><a href="../autoloader.html">Autoloader</a></li>
+                                        <li><a href="../http/index.html">HTTP</a></li>
+                                        <li><a href="../locale/index.html">Localization</a></li>
+                                        <li><a href="../router.html">Router</a></li>
+                                        <li><a href="../sockswork/index.html">SocksWork</a></li>
+                                        <li><a href="../ajax.html">Ajax</a></li>
+                                        <li><a href="../logger.html">Logger</a></li>
+                                        <li><a href="../security.html">Security</a></li>
+                                        <li><a href="../session.html">Session</a></li>
+                                        <li><a href="../results.html">Results</a></li>
+                                        <li><a href="../upload.html">File upload</a></li>
+                                        <li><a href="../validator.html">Validator</a></li>
+                                        <li><a href="../functions.html">Other functions</a></li>
+                                    </ul>
+                                </div><!--end well-->
+                            </div><!--end span3-->
+                            <div class="span9">
+                                <p>
+                                    The class <i>\Alexya\Database\QueryBuilder</i> provides a cool way for generating SQL queries.<br/>
+                                    It uses the <a href="https://en.wikipedia.org/wiki/Method_chaining" target="_blank">Method chaining desing pattern</a> for a more readable syntax.
+                                </p>
+                                <h2>Select queries</h2>
+                                <p>
+                                    The method <i>\Alexya\Database\QueryBuilder::select</i> begins a <i>SELECT</i> query and accepts 3 types of parameters:<br/>
+                                    <ul>
+                                        <li>Nothing (the same as passing "*" as parameter)</li>
+                                        <li>A string that contains the name of the colum to select</li>
+                                        <li>An array containing the columns to select</li>
+                                    </ul>
+                                    <pre class="prettyprint">
+&lt;?php
+/**
+ * Load Alexya's core
+ */
+require_once("bootstrap.php");
+
+$query = new \Alexya\Database\QueryBuilder();
+
+$query-&gt;select(); // SELECT *
+$query-&gt;select("name"); // SELECT `name`
+$query-&gt;select(["name", "password", "email"]); // SELECT `name`, `password`, `email`</pre>
+
+                                    Next we must indicate the table that we will use for getting the columns, we do that with the method <i>\Alexya\Database\QueryBuilder::from</i> that accepts as parameter a string containing the name of the table:<br/>
+                                    <pre class="prettyprint">
+&lt;?php
+/**
+ * Load Alexya's core
+ */
+require_once("bootstrap.php");
+
+$query = new \Alexya\Database\QueryBuilder();
+
+$query-&gt;select()
+      -&gt;from("users"); // SELECT * FROM `users`</pre>
+                                </p>
+                                <h2>Insert queries</h2>
+                                <p>
+                                    The method <i>\Alexya\Database\QueryBuilder::insert</i> begins an <i>INSERT</i> query and accepts as parameter a string
+                                    that is the name of the table to insert the new record:<br/>
+                                    <pre class="prettyprint">
+&lt;?php
+/**
+ * Load Alexya's core
+ */
+require_once("bootstrap.php");
+
+$query = new \Alexya\Database\QueryBuilder();
+
+$query-&gt;insert("users"); // INSERT INTO `users`</pre>
+
+                                    The next thing is to add the values to insert to the table, for that we use the method <i>\Alexya\Database\QueryBuilder::values</i>
+                                    that accepts an array as parameter, it contains the values to insert into table:<br/>
+                                    <pre class="prettyprint">
+&lt;?php
+/**
+ * Load Alexya's core
+ */
+require_once("bootstrap.php");
+
+$query = new \Alexya\Database\QueryBuilder();
+
+$query-&gt;insert("users")
+      -&gt;values([
+            "id"       =&gt; 1,
+            "name"     =&gt; "test",
+            "password" =&gt; "test",
+            "email"    =&gt; "test@test.test"
+        ]); // INSERT INTO `users` (`id`, `name`, `password`, `email`) VALUES (1, 'test', 'test', 'test@test.test')</pre>
+
+                                    If an index of the array is an object or an array it will serialize it to convert it to a string.<br/>
+                                    <pre class="prettyprint">
+&lt;?php
+/**
+ * Load Alexya's core
+ */
+require_once("bootstrap.php");
+
+$query = new \Alexya\Database\QueryBuilder();
+
+$query-&gt;insert("users")
+      -&gt;values([
+            "login_log" =&gt; ["date1", "date2", "date3"]
+        ]); // INSERT INTO `users` (`login_log`) VALUES ('a:3:{i:0;s:5:"date1";i:1;s:5:"date2";i:2;s:5:"date3";}')
+
+$log = new LoginLog(); //Let's assume it exists and is the same as the array but in an object shape
+$query-&gt;insert("users")
+      -&gt;values([
+            "login_log" =&gt; $log
+        ]); // INSERT INTO `users` (`login_log`) VALUES ('O:3:"Obj":3:{s:5:"date1";s:5:"date1";s:5:"date2";s:5:"date2";s:5:"date3";s:5:"date3";}')</pre>
+
+                                    Alternatively you can encode the values with JSON:<br/>
+                                    <pre class="prettyprint">
+&lt;?php
+/**
+ * Load Alexya's core
+ */
+require_once("bootstrap.php");
+
+$query = new \Alexya\Database\QueryBuilder();
+
+$query-&gt;insert("users")
+      -&gt;values([
+            "(JSON)login_log" =&gt; ["date1", "date2", "date3"]
+        ]); // INSERT INTO `users` (`login_log`) VALUES ('["date1","date2","date3"]')
+
+$log = new LoginLog(); //Let's assume it exists and is the same as the array but in an object shape
+$query-&gt;insert("users")
+      -&gt;values([
+            "(JSON)login_log" =&gt; $log
+        ]); // INSERT INTO `users` (`login_log`) VALUES ('{"date1":"date1","date2":"date2","date3":"date3"}')</pre>
+                                </p>
+                                <h2>Update queries</h2>
+                                <p>
+                                    The method <i>\Alexya\Database\QueryBuilder::update</i> begins an <i>UPDATE</i> query and accepts as parameter a stringt
+                                    that is the name of the table to alter.
+                                    <pre class="prettyprint">
+&lt;?php
+/**
+ * Load Alexya's core
+ */
+require_once("bootstrap.php");
+
+$query = new \Alexya\Database\QueryBuilder();
+
+$query-&gt;update("users"); // UPDATE `users`</pre>
+
+                                    Now we have to set the values to alter, we do that with the method <i>\Alexya\Database\QueryBuilder::set</i> which accepts as parameter an array with the values to alter. You can append to the end of the key the following tags:<br/>
+                                    <ul>
+                                        <li>[+]</li>
+                                        <li>[-]</li>
+                                        <li>[*]</li>
+                                        <li>[/]</li>
+                                    </ul>
+                                    You can also serialize values like in <i>INSERT</i> queries.<br/>
+                                    <pre class="prettyprint">
+&lt;?php
+/**
+ * Load Alexya's core
+ */
+require_once("bootstrap.php");
+
+$query = new \Alexya\Database\QueryBuilder();
+
+$query-&gt;update("users")
+      -&gt;set([
+            "name"     =&gt; "test",
+            "money[+]" =&gt; 2
+        ]); // UPDATE `users` SET `name`='test', `money`=(`money`+2)</pre> 
+                                </p>
+                                <h2>Delete queries</h2>
+                                <p>
+                                    Delete queries begins with the method <i>\Alexya\Database\QueryBuilder::delete</i> that accepts as parameter the table name as string:<br/>
+                                    <pre class="prettyprint">
+&lt;?php
+/**
+ * Load Alexya's core
+ */
+require_once("bootstrap.php");
+
+$query = new \Alexya\Database\QueryBuilder();
+
+$query-&gt;delete("users"); // DELETE FROM `users`</pre>
+                                </p>
+                                <h2>Conditions</h2>
+                                <p>
+                                    The methods <i>\Alexya\Database\QueryBuilder::and</i> and <i>\Alexya\Database\QueryBuilder::or</i> builds <i>AND</i> and <i>OR</i> conditions.
+                                    It accepts as parameter an array that contains the condition:<br/>
+                                    <pre class="prettyprint">
+&lt;?php
+/**
+ * Load Alexya's core
+ */
+require_once("bootstrap.php");
+
+$query = \Alexya\Database\QueryBuilder::and([
+    "name"     =&gt; "test",
+    "password" =&gt; "test"
+]); // `name`='test' AND `password`='test'
+
+$query = \Alexya\Database\QueryBuilder::or([
+    "name"     =&gt; "test",
+    "password" =&gt; "test"
+]); // `name`='test' OR `password`='test'</pre>
+                                    <br/>
+                                    The array follows the <i>WHERE</i> syntax.
+                                </p>
+                                <h2>Where syntax</h2>
+                                <p>
+                                    The method <i>\Alexya\Database\QueryBuilder::where</i> starts the <i>WHERE</i> clause and accepts as parameter containing an array:<br/>
+                                    <pre class="prettyprint">
+&lt;?php
+/**
+ * Load Alexya's core
+ */
+require_once("bootstrap.php");
+
+$query = new \Alexya\Database\QueryBuilder();
+
+$query-&gt;select()
+      -&gt;from("users")
+      -&gt;where([
+            "name" =&gt; "test"
+        ]); // SELECT * FROM `users` WHERE `name`='test'</pre>
+                                    For more advanced conditions you can use the followin tags:<br/>
+                                    <ul>
+                                        <li>[&gt;]</li>
+                                        <li>[&gt;=]</li>
+                                        <li>[!]</li>
+                                        <li>[&lt;&gt;]</li>
+                                        <li>[&gt;&lt;]</li>
+                                    </ul>
+
+                                    <pre class="prettyprint">
+&lt;?php
+/**
+ * Load Alexya's core
+ */
+require_once("bootstrap.php");
+
+$query = new \Alexya\Database\QueryBuilder();
+
+$query-&gt;where([
+    "id[&gt;]" =&gt; 100
+]); // WHERE `id`&gt;100
+
+$query-&gt;where([
+    "id[&gt;=]" =&gt; 100
+]); // WHERE `id`&gt;=100
+
+$query-&gt;where([
+    "id[!]" =&gt; 100
+]); // WHERE `id`!=100
+
+$query-&gt;where([
+    "id[&lt;&gt;]" =&gt; [0, 1000]
+]); // WHERE `id` BETWEEN 0 AND 1000
+
+$query-&gt;where([
+    "id[&gt;<]" =&gt; [0, 1000]
+]); // WHERE `id` NOT BETWEEN 0 AND 1000
+
+$query-&gt;where([
+    "id" =&gt; [0, 1, 2, 3, 4, 5, 6]
+]); // WHERE `id` IN(0,1,2,3,4,5,6)
+
+$query-&gt;where([
+    "id[!]" =&gt; [0, 1, 2, 3, 4, 5, 6]
+]); // WHERE `id` NOT IN(0,1,2,3,4,5,6)
+
+$query-&gt;where([
+    "name" =&gt; NULL
+]); // WHERE `name` IS NULL
+
+$query-&gt;where([
+    "name[!]" =&gt; NULL
+]); // WHERE `name` IS NOT NULL</pre>
+
+                                    You can also serialize data by adding `(JSON)` to the begining of the key:<br/>
+                                    <pre class="prettyprint">
+&lt;?php
+/**
+ * Load Alexya's core
+ */
+require_once("bootstrap.php");
+
+$query = new \Alexya\Database\QueryBuilder();
+
+$query-&gt;where([
+    "(JSON)login_log" =&gt; ["date1", "date2", "date3"]
+]); // WHERE `login_log`='["date1","date2","date3"]'</pre>
+                                </p>
+                                <h2>Other SQL functions</h2>
+                                <p>
+                                    <i>\Alexya\Database\QueryBuilder</i> provides 3 other methods for SQL clauses:<br/>
+                                    <br/>
+                                    The method <i>\Alexya\Database\QueryBuilder::limit</i> begins a <i>LIMIT</i> clause and can accept an integer or an array as parameter:<br/>
+                                    <pre class="prettyprint"><
+&lt;?php
+/**
+ * Load Alexya's core
+ */
+require_once("bootstrap.php");
+
+$query = new \Alexya\Database\QueryBuilder();
+
+$query-&gt;limit(1); //LIMIT 1
+$query-&gt;limit([1, 10]); //LIMT 1, 10</pre>
+
+                                    The method <i>\Alexya\Database\QueryBuilder::offset</i> begins a <i>OFFSET</i> clause and accepts an integer as parameter:<br/>
+                                    <pre class="prettyprint">
+&lt;?php
+/**
+ * Load Alexya's core
+ */
+require_once("bootstrap.php");
+
+$query = new \Alexya\Database\QueryBuilder();
+
+$query-&gt;offset(10); //OFFSET 10</pre>
+
+                                    The method <i>\Alexya\Database\QueryBuilder::sql</i> appends raw SQL to the query, this method does not avoids SQL injection so it's not recommended to use unless you know what you're doing:<br/>
+                                    <pre class="prettyprint">
+&lt;?php
+/**
+ * Load Alexya's core
+ */
+require_once("bootstrap.php");
+
+$query = new \Alexya\Database\QueryBuilder();
+
+$query-&gt;sql("SELECT * FROM users WHERE username='test'"); //SELECT * FROM users WHERE username='test'</pre>
+                                </p>
+                                <h2>Other methods</h2>
+                                <p>
+                                    The method <i>\Alexya\Database\QueryBuilder::getQuery</i> builds and returns the query:<br/>
+                                    <pre class="prettyprint">
+&lt;?php
+/**
+ * Load Alexya's core
+ */
+require_once("bootstrap.php");
+
+$query = new \Alexya\Database\QueryBuilder();
+
+$query-&gt;select()
+      -&gt;from("users")
+      -&gt;where(\Alexya\Database\QueryBuilder::and([
+            "name"     =&gt; "test",
+            "password" =&gt; "test"
+        ]));
+$sql = $query-&gt;getQuery(); SELECT * FROM `users` WHERE `name`='test' AND `password`='test'</pre>
+
+                                    The method <i>\Alexya\Database\QueryBuilder::clear</i> clears the query buffer and starts building a new query:<br/>
+                                    <pre class="prettyprint">
+&lt;?php
+/**
+ * Load Alexya's core
+ */
+require_once("bootstrap.php");
+
+$query = new \Alexya\Database\QueryBuilder();
+
+$query-&gt;select()
+      -&gt;from("users")
+      -&gt;where(\Alexya\Database\QueryBuilder::and([
+            "name"     =&gt; "test",
+            "password" =&gt; "test"
+        ]));
+$sql = $query-&gt;getQuery(); SELECT * FROM `users` WHERE `name`='test' AND `password`='test'
+
+$query-&gt;select()
+      -&gt;from("users")
+      -&gt;where([
+            "id" =&gt; 1
+        ]);
+$sql = $query-&gt;getQuery(); SELECT * FROM `users` WHERE `name`='test' AND `password`='test' SELECT * FROM `users` WHERE `id`=1
+
+$query-&gt;clear();
+
+$query-&gt;select()
+      -&gt;from("users")
+      -&gt;where([
+            "id" =&gt; 1
+        ]);
+$sql = $query-&gt;getQuery(); SELECT * FROM `users` WHERE `2`=1</pre>
+                                </p>
+                            </div><!--end span9-->
+                        </div><!--end row-->
+                    </section>
+                </div><!--end span12-->
+            </div><!--end row-->
+        </div><!--end container-->
+    </div><!--end main-content-->
+    <footer>
+        <div class="container">
+            <div class="row">
+                <p>Alexya Framework - The intelligent Loli Framework by <a href="https://github.com/manulaiko" target="_blank">Manulaiko</a></p>
+            </div><!--end row-->
+        </div><!--end container-->
+    </footer>
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="../../js/jquery.min.js"></script>
+    <script src="../../js/bootstrap.min.js"></script>
+    <script src="../../js/prettify.js"></script>
+    <script type="text/javascript" src="../../js/respond.js"></script>
+    <script type="text/javascript">
+        $(function(){
+            //Load Goodle Code Pretiffy
+            window.prettyPrint && prettyPrint();
+            //Tab function
+            $('#pluginTab a').click(function (e) {
+                e.preventDefault();
+                $(this).tab('show');
+            });
+            //FAQ autosuggest
+            $('.typeahead').typeahead();
+            //tooltip init
+            $("a.tip").tooltip();
+            //footer link to got top
+            gotoTop();
+
+            function gotoTop(){
+                // scroll body to 0px on click
+                $('a#top').on('click',function () {
+                    $('body,html').animate({
+                        scrollTop: 0
+                    }, 800);
+                    return false;
+                });
+            };
+        });
+    </script>
+</body>
+</html>

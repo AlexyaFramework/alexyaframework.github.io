@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <meta name="description" content="Alexya Framework, the intelligent Loli Framework for PHP 7">
+    <meta name="keywords" content="alexya,framework,php,php7,hmvc,mvc,orm,library,hmvvmc,mvvmc,manulaiko">
+    <meta name="author" content="Manulaiko">
+
+    <title>Alexya Framework - Database ORM</title>
+
+    <!-- Styles -->
+    <link href="../../css/bootstrap.min.css" rel="stylesheet">
+    <link href="../../css/bootstrap-responsive.css" rel="stylesheet">
+    <link href="../../css/style.css" rel="stylesheet">
+    <link href="../../css/font-awesome.css" rel="stylesheet">
+    <link href="../../css/css.css" rel="stylesheet" type="text/css">
+    <link href="../../css/prettify.css" rel="stylesheet">
+    <!--[if IE]>
+        <link href="http://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet" type="text/css">
+        <link href="http://fonts.googleapis.com/css?family=Open+Sans:300italic" rel="stylesheet" type="text/css">
+        <link href="http://fonts.googleapis.com/css?family=Open+Sans:400italic" rel="stylesheet" type="text/css">
+        <link href="http://fonts.googleapis.com/css?family=Open+Sans:600italic" rel="stylesheet" type="text/css">
+        <link href="http://fonts.googleapis.com/css?family=Open+Sans:700italic" rel="stylesheet" type="text/css">
+        <link href="http://fonts.googleapis.com/css?family=Open+Sans:300" rel="stylesheet" type="text/css">
+        <link href="http://fonts.googleapis.com/css?family=Open+Sans:400" rel="stylesheet" type="text/css">
+        <link href="http://fonts.googleapis.com/css?family=Open+Sans:600" rel="stylesheet" type="text/css">
+        <link href="http://fonts.googleapis.com/css?family=Bree+Serif:400" rel="stylesheet" type="text/css">
+    <![endif]-->
+        <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+        <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+</head>
+<body>
+    <header class="masthead">
+        <nav class="navbar navbar-inverse navbar--top">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                </div>
+                <div id="navbar" class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        <li><a href="../../index.html">Home</a></li>
+                        <li><a href="../../features.html">Features</a></li>
+                        <li class="active"><a href="../index.html">Documentation</a></li>
+                        <li><a href="../../examples/index.html">Examples</a></li>
+                        <li><a href="../../changelog.html">Changelog</a></li>
+                        <li><a href="https://github.com/manulaiko/alexya/releases">Downloads</a></li>
+                    </ul>
+                </div><!--/.navbar-collapse -->
+            </div>
+        </nav>
+        <div class="container">
+            <h1 class="font-bree-serif">Alexya Framework</h1>
+            <p class="font-open-sans-normal">The intelligent Loli Framework</p>
+        </div><!--end container-->
+    </header>
+    <div class="main-content">
+        <div class="container">
+            <div class="row" id="content">
+                <div class="span12">
+                    <section class="sec-header">
+                        <h3 class="font-bree-serif">Documentation <small>Database</small></h3>
+                        <div class="row">
+                            <div class="span3">
+                                <div class="well">
+                                    <ul class="nav nav-pills nav-stacked">
+                                        <li><a href="../configuration.html">Configuration</a></li>
+                                        <li><a href="../hmvvmc/index.html">HMV(VM)C</a></li>
+                                        <li><a href="index.html">Database</a></li>
+                                        <li>
+                                            <ul style="list-style: none; padding-top: 2px;">
+                                                <li><a href="configuration.html">Configuration</a></li>
+                                                <li><a href="conventions.html">Conventions</a></li>
+                                                <li><a href="querybuilder.html">Building Queries</a></li>
+                                                <li style="background-color: #337ab7; color: #fff;"><a href="orm.html" style="color: #fff;">ORM</a></li>
+                                            </ul>
+                                        </li>
+                                        <li><a href="../dom.html">DOM generation</a></li>
+                                        <li><a href="../event_dispatcher.html">Event dispatcher</a></li>
+                                        <li><a href="../filesystem/index.html">File system</a></li>
+                                        <li><a href="../autoloader.html">Autoloader</a></li>
+                                        <li><a href="../http/index.html">HTTP</a></li>
+                                        <li><a href="../locale/index.html">Localization</a></li>
+                                        <li><a href="../router.html">Router</a></li>
+                                        <li><a href="../sockswork/index.html">SocksWork</a></li>
+                                        <li><a href="../ajax.html">Ajax</a></li>
+                                        <li><a href="../logger.html">Logger</a></li>
+                                        <li><a href="../security.html">Security</a></li>
+                                        <li><a href="../session.html">Session</a></li>
+                                        <li><a href="../results.html">Results</a></li>
+                                        <li><a href="../upload.html">File upload</a></li>
+                                        <li><a href="../validator.html">Validator</a></li>
+                                        <li><a href="../functions.html">Other functions</a></li>
+                                    </ul>
+                                </div><!--end well-->
+                            </div><!--end span3-->
+                            <div class="span9">
+                                <p>
+                                    ORM stands for Object-Relational Mapping, here's <a href="https://en.wikipedia.org/wiki/Object-relational_mapping" target="_blank">all mighty WikiPedia</a>
+                                </p>
+                                <h2>Introduction</h2>
+                                <p>
+                                    ORM classes must be located in the package <i>\Application\ORM</i> and must extend the class <i>\Alexya\Database\ORM\Model</i>.<br/>
+                                    The name of the class must be the singular of the table name.<br/>
+                                    <br/>
+                                    For example:<br/>
+                                    The ORM class for table <i>users</i> should be <i>\Application\ORM\User</i><br/>
+                                    <br/>
+                                    If you don't want to follow the <a href="conventions.html" target="_blank">conventions</a> you can set the property <i>$_table</i> with the name of the table and the property <i>$_primaryKey</i> for setting the primary key columm:<br/><br/>
+                                    <pre class="prettyprint">
+&lt;?php
+namespace \Application\ORM;
+
+class UsersORM extends \Alexya\Database\ORM\Model
+{
+    protected $_table      = "users";
+    protected $_primaryKey = "usersID";
+}</pre>
+
+                                </p>
+                                <h2>CRUD</h2>
+                                <p>
+
+                                    CRUD stands for Create, Read, Update, Delete.
+
+                                    <h3>Creating records</h3>
+
+                                    To create a new record call the method <i>\Alexya\Database\ORM\Model::create</i>:<br/><br/>
+                                    <pre class="prettyprint">
+&lt;?php
+
+$user = \Application\ORM\UsersORM::create();
+
+$user-&gt;id       = 1;
+$user-&gt;name     = "test";
+$user-&gt;password = "test";
+$user-&gt;email    = "test@test.test";
+
+$user-&gt;save();</pre>
+
+                                    <h3>Reading records</h3>
+
+                                    The method <i>\Alexya\Database\ORM\Model::find</i> accepts as parameter the value of the primary key of the table or an array that represents the <i>WHERE</i> clause of the query to generate and returns an instance of the ORM class:<br/><br/>
+                                    <pre class="prettyprint">
+&lt;?php
+
+$user      = \Application\ORM\UsersORM::findRecord(1); // SELECT * FROM `users` WHERE `usersID`=1
+$otherUser = \Application\ORM\UsersORM::findRecord([
+    "name" =&gt; "test"
+]); // SELECT * FROM `users` WHERE `name`='test'
+
+if($user-&gt;name == $otherUser-&gt;name) {
+    $user-&gt;name = "Test";
+    $user-&gt;save;
+    
+    $otherUser-&gt;id = 2;
+    $otherUser-&gt;save;
+}</pre><br/>
+                                    The second parameter of <i>\Alexya\Database\ORM\Model::find</i> is a boolean that represents whether the returned instance should set relations or not.<br/>
+                                    <br/>
+                                    If you want to get more than one result use the method <i>\Alexya\Database\ORM\Model::get</i> which accepts 3 parameters:<br/>
+                                    <ul>
+                                        <li>An integer that represents the amount of records to retrieve (-1 = all records)</li>
+                                        <li>A string, array or instance of <a href="querybuilder.html" target="_blank">\Alexya\Database\QueryBuilder</a> that contains more SQL to add to the query</li>
+                                        <li>A boolean that represents whether the returned instance should set relations or not</li>
+                                    </ul>
+
+                                    <pre class="prettyprint">
+&lt;?php
+
+$users = \Application\ORM\UsersORM::get(10, [
+    "name[!]" =&gt; "test"
+]); // SELECT * FROM `users` WHERE `name`!='test' LIMIT 10</pre>
+
+                                    <h3>Updating records</h3>
+
+                                    Once you have the ORM instance you can use the methods <i>\Alexya\Tools\Object::get</i> and <i>\Alexya\Tools\Object::set</i> to changes the values of columns, it also has the <a href="http://php.net/manual/en/language.oop5.overloading.php" target="_blank">magic methods __get, __set, __isset and __unset</a> for
+                                    an alternative syntax. To update the database use the method <i>\Alexya\Database\ORM\Model::save</i>:<br/><br/>
+                                    <pre class="prettyprint">
+&lt;?php
+
+$user = \Application\ORM\UsersORM::findRecord(1); // SELECT * FROM `users` WHERE `usersID`=1
+
+$user-&gt;name     = "test";
+$user-&gt;password = "test";
+
+$user-&gt;save(); // UPDATE `users` SET `name`='test', `password`='test' WHERE `usersID`=1</pre>
+
+                                    <h3>Deleting records</h3>
+
+                                    To delete records you must call the method <i>\Alexya\Database\ORM\Model::delete</i>:<br/><br/>
+                                    <pre class="prettyprint">
+&lt;?php
+
+$user = \Application\ORM\UsersORM::findRecord(1); // SELECT * FROM `users` WHERE `usersID`=1
+
+$user-&gt;delete(); // DELETE FROM `users` WHERE `userID`=1</pre>
+                                </p>
+                                <h2>Relations</h2>
+                                <p>
+                                    Relations let us divide a table in different sub-tables, it's trongly recommended to use the conventions listed in <a href="Conventions.md" target="_blank">Conventions.md</a>.<br/>
+                                    <br/>
+                                    The property <i>\Alexya\Database\ORM\Model::$_relations</i> is an array that contains the relations for the ORM instance.<br/>
+                                    <br/>
+                                    The key of the index is the name of the ORM class (Alexya assumes it's located in <i>\Application\ORM</i> so there's no need to put it) and the value is
+                                    an array that contains the following indexes:<br/>
+                                    <ul>
+                                        <li><i>type</i> string</li>
+                                        <li><i>foreingKey</i> string</li>
+                                        <li><i>localKey</i> string </li>
+                                        <li><i>name</i> string</li>
+                                        <li><i>setRelations</i> boolean</li>
+                                        <li><i>amount</i> integer</li>
+                                        <li><i>class</i> string</li>
+                                        <li><i>condition</i> callback</li>
+                                    </ul>
+                                    <br/>
+                                    The most simple configuration for a relation is a string value that contains the ORM class of the related table. Alexya will assume that the foreing key is the name if the ORM instance table followed by its primary key, it will also set a relation of type <i>has_one</i>:<br/><br/>
+                                    <pre class="prettyprint">
+&lt;?php
+namespace Application\ORM;
+
+class User extends \Alexya\Database\ORM\Model
+{
+    /**
+     * ORM Relations
+     */
+    protected static $_relations = [
+        "Account"
+    ]
+}
+
+$user = User::findRecord(1); // SELECT * FROM `users` WHERE `id`=1
+//$user-&gt;Account =  SELECT * FROM `accounts` WHERE `users_id`=1 LIMIT 1
+
+$user-&gt;Account-&gt;name = "test";</pre><br/>
+                                    The type index is the type of relation, it can be either <i>has_one</i> or <i>has_many</i>, it makes an instance of the specified ORM class or an array of instances of ORM classes:<br/><br/>
+                                    <pre class="prettyprint">
+&lt;?php
+namespace Application\ORM;
+
+class User extends Alexya\Database\ORM\Model
+{
+    /**
+     * ORM Relations
+     */
+    protected static $_relations = [
+        "Account",
+        "Comment" =&gt; [
+            "type" =&gt; "has_many"
+        ]
+    ];
+}
+
+$user = User::findRecord(1); // SELECT * FROM `users` WHERE `id`=1
+//$user-&gt;Account = SELECT * FROM `accounts` WHERE `users_id`=1 LIMIT 1
+//$user-&gt;Comment = SELECT * FROM `comments` WHERE `users_id`=1
+
+$user-&gt;Account-&gt;name = "test";
+
+foreach($user-&gt;Comment as $comment) {
+    echo $comment-&gt;content."&lt;br/&gt;";
+}</pre><br/>
+                                    The <i>foreingKey</i> index is the name of the column of the class to relate, by default it's the table of the ORM instance followed by its primary key.<br/>
+                                    For example:<br/>
+                                    <blockquote>
+                                        The class <i>\Application\ORM\User</i> has table name <i>users</i> and primary key <i>id</i><br/>
+                                        When setting the relations for the <i>\Application\ORM\Account</i> class it will use <i>users_id</i> as foreing key meaning that table <i>accounts</i> should have a column called <i>users_id</i><br/>
+                                    </blockquote>
+                                    <br/>
+                                    The <i>localKey</i> is the value of <i>foreingKey</i> in the ORM instance.<br/><br/>
+                                    <pre class="prettyprint">
+&lt;?php
+namespace Application\ORM;
+
+class User extends Alexya\Database\ORM\Model
+{
+    /**
+     * ORM Relations
+     */
+    protected static $_relations = [
+        "Account",
+        "Comment" =&gt; [
+            "type"       =&gt; "has_many",
+            "foreingKey" =&gt; "users_name",
+            "localKey"   =&gt; "name" //Asume it's 'test'
+        ]
+    ];
+}
+
+$user = \Application\ORM\User::findRecord(1); // SELECT * FROM `users` WHERE `id`=1
+//$user-&gt;Account = SELECT * FROM `accounts` WHERE `users_id`=1 LIMIT 1
+//$user-&gt;Comment = SELECT * FROM `comments` WHERE `users_name`='test'
+
+$user-&gt;Account-&gt;name = "test";
+
+foreach($user-&gt;Comment as $comment) {
+    $post = \Application\ORM\Post::findRecord($comment-&gt;posts_id);
+    
+    echo "Content: ". $comment-&gt;content ."&lt;br/&gt;";
+    echo "Posted on: ". $post-&gt;title ."&lt;br/&gt;";
+}</pre><br/>
+                                    In this example the relation for the class <i>\Application\ORM\Comment</i> is an array, meaning it contains multiple ORM instances and the singular name of the table is not convenient we can change the name with the index <i>name</i>:<br/><br/>
+                                    <pre class="prettyprint">
+&lt;?php
+namespace Application\ORM;
+
+class User extends Alexya\Database\ORM\Model
+{
+    /**
+     * ORM Relations
+     */
+    protected static $_relations = [
+        "Account",
+        "Comment" =&gt; [
+            "type"       =&gt; "has_many",
+            "foreingKey" =&gt; "users_name",
+            "localKey"   =&gt; "name", //Asume it's 'test'
+            "name"       =&gt; "Comments"
+        ]
+    ];
+}
+
+$user = User::findRecord(1); // SELECT * FROM `users` WHERE `id`=1
+//$user-&gt;Account  = SELECT * FROM `accounts` WHERE `users_id`=1 LIMIT 1
+//$user-&gt;Comments = SELECT * FROM `comments` WHERE `users_name`='test'
+
+$user-&gt;Account-&gt;name = "test";
+
+foreach($user-&gt;Comments as $comment) {
+    $post = \Application\ORM\Post::findRecord($comment-&gt;posts_id);
+    
+    echo "Content: ". $comment-&gt;content ."&lt;br/&gt;";
+    echo "Posted on: ". $post-&gt;title ."&lt;br/&gt;";
+}</pre><br/>
+                                    The <i>setRelations</i> index is a boolean that represents wether the related class should instance its relations aswell, by default is set to false to avoid numerous queries:<br/><br/>
+                                    <pre class="prettyprint">
+&lt;?php
+namespace Application\ORM;
+
+class User extends Alexya\Database\ORM\Model
+{
+    /**
+     * ORM Relations
+     */
+    protected static $_relations = [
+        "Account",
+        "Comment" =&gt; [
+            "type"         =&gt; "has_many",
+            "foreingKey"   =&gt; "users_name",
+            "localKey"     =&gt; "name", //Asume it's 'test'
+            "name"         =&gt; "Comments",
+            "setRelations" =&gt; true
+        ]
+    ];
+}
+
+$user = User::findRecord(1); // SELECT * FROM `users` WHERE `id`=1
+//$user-&gt;Account  = SELECT * FROM `accounts` WHERE `users_id`=1 LIMIT 1
+//$user-&gt;Comments = SELECT * FROM `comments` WHERE `users_name`='test'
+
+$user-&gt;Account-&gt;name = "test";
+
+foreach($user-&gt;Comments as $comment) {
+    echo "Content: ". $comment-&gt;content ."&lt;br/&gt;";
+    echo "Posted on: ". $comment-&gt;Post-&gt;title ."&lt;br/&gt;";
+}</pre><br/>
+                                    The <i>ammount</i> index represents the length of the relations array (if relation is of type <i>has_many</i>) by default it will load all related records.<br/><br/>
+                                    <pre class="prettyprint">
+&lt;?php
+namespace Application\ORM;
+
+class User extends Alexya\Database\ORM\Model
+{
+    /**
+     * ORM Relations
+     */
+    protected static $_relations = [
+        "Account",
+        "Comment" =&gt; [
+            "type"         =&gt; "has_many",
+            "foreingKey"   =&gt; "users_name",
+            "localKey"     =&gt; "name", //Asume it's 'test'
+            "name"         =&gt; "Comments",
+            "setRelations" =&gt; true,
+            "ammount"      =&gt; 10
+        ]
+    ];
+}
+
+$user = User::findRecord(1); // SELECT * FROM `users` WHERE `id`=1
+//$user-&gt;Account  = SELECT * FROM `accounts` WHERE `users_id`=1 LIMIT 1
+//$user-&gt;Comments = SELECT * FROM `comments` WHERE `users_name`='test'
+
+$user-&gt;Account-&gt;name = "test";
+
+echo "Showing 10 comments of ". $user-&gt;Account-&gt;name ."&lt;br/&gt;";
+foreach($user-&gt;Comments as $comment) {
+    echo "Content: ". $comment-&gt;content ."&lt;br/&gt;";
+    echo "Posted on: ". $comment-&gt;Post-&gt;title ."&lt;br/&gt;";
+}</pre><br/>
+                                    The <i>class</i> index is a class name that will be instanced instead of the ORM class:<br/><br/>
+                                    <pre class="prettyprint">
+&lt;?php
+//on namespace \Application\ORM
+class User extends Alexya\Database\ORM\Model
+{
+    /**
+     * ORM Relations
+     */
+    protected static $_relations = [
+        "Account",
+        "Comment" =&gt; [
+            "type"         =&gt; "has_many",
+            "foreingKey"   =&gt; "users_name",
+            "localKey"     =&gt; "name", //Asume it's 'test'
+            "name"         =&gt; "Comments",
+            "setRelations" =&gt; true,
+            "ammount"      =&gt; 10,
+            "class"        =&gt; "\Application\Handler\Comment"
+        ]
+    ];
+}
+
+//on namespace \Application\Handler
+class Comment
+{
+    private $_comment = [];
+    
+    /**
+     * Constructor
+     *
+     * @param array $comment Account's comment
+     */
+    public function __construct(array $comment)
+    {
+        $this-&gt;_comment = $comment;
+    }
+    
+    /**
+     * Prints the comment
+     */
+    public function print()
+    {
+        echo "Content: ". $this-&gt;_comment["content"] ."&lt;br/&gt;";
+    }
+}
+
+$user = User::findRecord(1); // SELECT * FROM `users` WHERE `id`=1
+//$user-&gt;Account  = SELECT * FROM `accounts` WHERE `users_id`=1 LIMIT 1
+//$user-&gt;Comments = SELECT * FROM `comments` WHERE `users_name`='test'
+
+$user-&gt;Account-&gt;name = "test";
+
+echo "Showing 10 comments of ". $user-&gt;Account-&gt;name ."&lt;br/&gt;";
+foreach($user-&gt;Comments as $comment) {
+    $comment-&gt;print();
+}</pre><br/>
+                                    The <i>condition</i> index is a callback that should filter the current relation, it must return a boolean that represents whether the current related record passes filter or not.<br/><br/>
+                                    <pre class="prettyprint">
+&lt;?php
+namespace Application\ORM;
+
+class User extends Alexya\Database\ORM\Model
+{
+    /**
+     * ORM Relations
+     */
+    protected static $_relations = [
+        "Account",
+        "Comment" =&gt; [
+            "type"         =&gt; "has_many",
+            "foreingKey"   =&gt; "users_name",
+            "localKey"     =&gt; "name", //Asume it's 'test'
+            "name"         =&gt; "Comments",
+            "setRelations" =&gt; true,
+            "ammount"      =&gt; 10,
+            "condition"    =&gt; "\Application\ORM\User::filterComment"
+        ]
+    ];
+    
+    /**
+     * Filters a comment
+     *
+     * @param array $comment Current relation record
+     *
+     * @return boolean Whether the comment passes filter or not
+     */
+    public static function filterComment(array $comment)
+    {
+        if($comment["id"] &gt; 100 && $comment["id"] &lt; 10000) {
+            return true;
+        }
+        
+        return false;
+    }
+}
+
+$user = User::findRecord(1); // SELECT * FROM `users` WHERE `id`=1
+//$user-&gt;Account  = SELECT * FROM `accounts` WHERE `users_id`=1 LIMIT 1
+//$user-&gt;Comments = SELECT * FROM `comments` WHERE `users_name`='test'
+
+$user-&gt;Account-&gt;name = "test";
+
+echo "Showing 10 comments of ". $user-&gt;Account-&gt;name ."&lt;br/&gt;";
+foreach($user-&gt;Comments as $comment) {
+    echo "Content: ". $comment-&gt;content ."&lt;br/&gt;";
+    echo "Posted on: ". $comment-&gt;Post-&gt;title ."&lt;br/&gt;";
+}</pre>
+                                </p>
+                            </div><!--end span9-->
+                        </div><!--end row-->
+                    </section>
+                </div><!--end span12-->
+            </div><!--end row-->
+        </div><!--end container-->
+    </div><!--end main-content-->
+    <footer>
+        <div class="container">
+            <div class="row">
+                <p>Alexya Framework - The intelligent Loli Framework by <a href="https://github.com/manulaiko" target="_blank">Manulaiko</a></p>
+            </div><!--end row-->
+        </div><!--end container-->
+    </footer>
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="../../js/jquery.min.js"></script>
+    <script src="../../js/bootstrap.min.js"></script>
+    <script src="../../js/prettify.js"></script>
+    <script type="text/javascript" src="../../js/respond.js"></script>
+    <script type="text/javascript">
+        $(function(){
+            //Load Goodle Code Pretiffy
+            window.prettyPrint && prettyPrint();
+            //Tab function
+            $('#pluginTab a').click(function (e) {
+                e.preventDefault();
+                $(this).tab('show');
+            });
+            //FAQ autosuggest
+            $('.typeahead').typeahead();
+            //tooltip init
+            $("a.tip").tooltip();
+            //footer link to got top
+            gotoTop();
+
+            function gotoTop(){
+                // scroll body to 0px on click
+                $('a#top').on('click',function () {
+                    $('body,html').animate({
+                        scrollTop: 0
+                    }, 800);
+                    return false;
+                });
+            };
+        });
+    </script>
+</body>
+</html>

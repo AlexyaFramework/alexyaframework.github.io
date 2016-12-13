@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <meta name="description" content="Alexya Framework, the intelligent Loli Framework for PHP 7">
+    <meta name="keywords" content="alexya,framework,php,php7,hmvc,mvc,orm,library,hmvvmc,mvvmc,manulaiko">
+    <meta name="author" content="Manulaiko">
+
+    <title>Alexya Framework - Building a Blog</title>
+
+    <!-- Styles -->
+    <link href="../../css/bootstrap.min.css" rel="stylesheet">
+    <link href="../../css/bootstrap-responsive.css" rel="stylesheet">
+    <link href="../../css/style.css" rel="stylesheet">
+    <link href="../../css/font-awesome.css" rel="stylesheet">
+    <link href="../../css/css.css" rel="stylesheet" type="text/css">
+    <link href="../../css/prettify.css" rel="stylesheet">
+    <!--[if IE]>
+        <link href="http://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet" type="text/css">
+        <link href="http://fonts.googleapis.com/css?family=Open+Sans:300italic" rel="stylesheet" type="text/css">
+        <link href="http://fonts.googleapis.com/css?family=Open+Sans:400italic" rel="stylesheet" type="text/css">
+        <link href="http://fonts.googleapis.com/css?family=Open+Sans:600italic" rel="stylesheet" type="text/css">
+        <link href="http://fonts.googleapis.com/css?family=Open+Sans:700italic" rel="stylesheet" type="text/css">
+        <link href="http://fonts.googleapis.com/css?family=Open+Sans:300" rel="stylesheet" type="text/css">
+        <link href="http://fonts.googleapis.com/css?family=Open+Sans:400" rel="stylesheet" type="text/css">
+        <link href="http://fonts.googleapis.com/css?family=Open+Sans:600" rel="stylesheet" type="text/css">
+        <link href="http://fonts.googleapis.com/css?family=Bree+Serif:400" rel="stylesheet" type="text/css">
+    <![endif]-->
+        <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+        <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+</head>
+<body>
+    <header class="masthead">
+        <nav class="navbar navbar-inverse navbar--top">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                </div>
+                <div id="navbar" class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        <li><a href="../../index.html">Home</a></li>
+                        <li><a href="../../features.html">Features</a></li>
+                        <li><a href="../../doc/index.html">Documentation</a></li>
+                        <li class="active"><a href="../index.html">Examples</a></li>
+                        <li><a href="../../changelog.html">Changelog</a></li>
+                        <li><a href="https://github.com/manulaiko/alexya/releases">Downloads</a></li>
+                    </ul>
+                </div><!--/.navbar-collapse -->
+            </div>
+        </nav>
+        <div class="container">
+            <h1 class="font-bree-serif">Alexya Framework</h1>
+            <p class="font-open-sans-normal">The intelligent Loli Framework</p>
+        </div><!--end container-->
+    </header>
+    <div class="main-content">
+        <div class="container">
+            <div class="row" id="content">
+                <div class="span12">
+                    <section class="sec-header">
+                        <h3 class="font-bree-serif">Examples</h3>
+                        <div class="row">
+                            <div class="span3">
+                                <div class="well">
+                                    <ul class="nav nav-pills nav-stacked">
+                                        <li><a href="../installation.html">Installation</a></li>
+                                        <li><a href="../getting-started.html">Getting started</a></li>
+                                        <li class="active"><a href="index.html">Building a Blog</a></li>
+                                        <li>
+                                            <ul style="list-style: none; padding-top: 2px;">
+                                                <li><a href="installation.html">Installation</a></li>
+                                                <li style="background-color: #337ab7; color: #fff;"><a href="database_design.html" style="color: #fff;">Designing the database</a></li>
+                                                <li><a href="orm.html">Building ORM classes</a></li>
+                                                <li><a href="post_list.html">Listing posts</a></li>
+                                                <li><a href="read_post.html">Reading posts</a></li>
+                                                <li><a href="comments.html">Comments</a></li>
+                                                <li><a href="acp.html">The Admin Control Panel</a></li>
+                                            </ul>
+                                        </li>
+                                        <li><a href="../forum/index.html">Building a forum</a></li>
+                                    </ul>
+                                </div><!--end well-->
+                            </div><!--end span3-->
+                            <div class="span9">
+                                <p>
+                                    One of the first things to do is to design the database so we have something to work with.
+                                </p>
+                                <p>
+                                    There are a few tables that are obviusly going to be needed for a simple blog:<br/>
+                                    <ul>
+                                        <li><i>posts</i>, for all blog posts</li>
+                                        <li><i>comments</i>, for all blog comments</li>
+                                        <li><i>categories</i>, for the categories where a blog can be posted</li>
+                                        <li><i>users</i>, for users that have been registered</li>
+                                    </ul>
+                                    With this basic tables we can start doing our blog.
+                                </p>
+                                <h3>Table <i>posts</i></h3>
+                                <p>
+                                    The table <i>posts</i> will contain the posts of our blog:<br/>
+                                    <pre class="prettyprint">
+CREATE TABLE `posts` (
+  `id`         int(10)      UNSIGNED NOT NULL AUTO_INCREMENT, -- Table identifier
+  `date`       timestamp             NOT NULL DEFAULT CURRENT_TIMESTAMP, -- Date when post was published
+  `users_id`   int(10)      UNSIGNED NOT NULL DEFAULT '-1', -- Post author
+  `title`      varchar(255)          NOT NULL, -- Post title
+  `content`    text                  NOT NULL, -- Post content
+  `categories` varchar(255)          NOT NULL DEFAULT '[]', -- JSON containing categories where post was posted
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;</pre><br/>
+                                </p>
+                                <h3>Table <i>comments</i></h3>
+                                <p>
+                                    The table <i>commnets</i> will contain comments for each post on our blog:<br/>
+                                    <pre class="prettyprint">
+CREATE TABLE `comments` (
+  `id`       int(10)   UNSIGNED NOT NULL AUTO_INCREMENT, -- Table identifier
+  `date`     timestamp          NOT NULL DEFAULT CURRENT_TIMESTAMP, -- Date when comment was published
+  `users_id` int(10)   UNSIGNED NOT NULL DEFAULT '-1', -- Comment author
+  `posts_id` int(10)   UNSIGNED NOT NULL DEFAULT '-1', -- Post of comment
+  `content`  text               NOT NULL, -- Comment content
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;</pre><br/>
+                                </p>
+                                <h3>Table <i>comments</i></h3>
+                                <p>
+                                    The table <i>commnets</i> will contain comments for each post on our blog:<br/>
+                                    <pre class="prettyprint">
+CREATE TABLE `categories` (
+  `id`   int(10)      UNSIGNED NOT NULL AUTO_INCREMENT, -- Table identifier
+  `name` varchar(255)          NOT NULL, -- Category name
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;</pre><br/>
+                                </p>
+                                <h3>Table <i>comments</i></h3>
+                                <p>
+                                    The table <i>commnets</i> will contain comments for each post on our blog:<br/>
+                                    <pre class="prettyprint">
+
+CREATE TABLE `users` (
+  `id`         int(10)     UNSIGNED NOT NULL AUTO_INCREMENT, -- Table identifier
+  `date`       timestamp            NOT NULL DEFAULT CURRENT_TIMESTAMP, -- Date when user registered
+  `session_id` char(32)             NOT NULL, -- Unique session id
+  `name`       varchar(255)         NOT NULL, -- User's name
+  `password`   char(32)             NOT NULL, -- User's password
+  `email`      varchar(255)         NOT NULL, -- User's email
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `session_id` (`name`,`email`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;</pre><br/>
+                                </p>
+                                <p>
+                                    And that's all we need for our blog, now we can start configuring Alexya.
+                                </p>
+                            </div><!--end span9-->
+                        </div><!--end row-->
+                    </section>
+                </div><!--end span12-->
+            </div><!--end row-->
+        </div><!--end container-->
+    </div><!--end main-content-->
+    <footer>
+        <div class="container">
+            <div class="row">
+                <p>Alexya Framework - The intelligent Loli Framework by <a href="https://github.com/manulaiko" target="_blank">Manulaiko</a></p>
+            </div><!--end row-->
+        </div><!--end container-->
+    </footer>
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="../../js/jquery.min.js"></script>
+    <script src="../../js/bootstrap.min.js"></script>
+    <script src="../../js/prettify.js"></script>
+    <script type="text/javascript" src="../../js/respond.js"></script>
+    <script type="text/javascript">
+        $(function(){
+            //Load Goodle Code Pretiffy
+            window.prettyPrint && prettyPrint();
+            //Tab function
+            $('#pluginTab a').click(function (e) {
+                e.preventDefault();
+                $(this).tab('show');
+            });
+            //FAQ autosuggest
+            $('.typeahead').typeahead();
+            //tooltip init
+            $("a.tip").tooltip();
+            //footer link to got top
+            gotoTop();
+
+            function gotoTop(){
+                // scroll body to 0px on click
+                $('a#top').on('click',function () {
+                    $('body,html').animate({
+                        scrollTop: 0
+                    }, 800);
+                    return false;
+                });
+            };
+        });
+    </script>
+</body>
+</html>

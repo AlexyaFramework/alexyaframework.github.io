@@ -1,0 +1,252 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <meta name="description" content="Alexya Framework, the intelligent Loli Framework for PHP 7">
+    <meta name="keywords" content="alexya,framework,php,php7,hmvc,mvc,orm,library,hmvvmc,mvvmc,manulaiko">
+    <meta name="author" content="Manulaiko">
+
+    <title>Alexya Framework - MVC, The Model</title>
+
+    <!-- Styles -->
+    <link href="../../css/bootstrap.min.css" rel="stylesheet">
+    <link href="../../css/bootstrap-responsive.css" rel="stylesheet">
+    <link href="../../css/style.css" rel="stylesheet">
+    <link href="../../css/font-awesome.css" rel="stylesheet">
+    <link href="../../css/css.css" rel="stylesheet" type="text/css">
+    <link href="../../css/prettify.css" rel="stylesheet">
+    <!--[if IE]>
+        <link href="http://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet" type="text/css">
+        <link href="http://fonts.googleapis.com/css?family=Open+Sans:300italic" rel="stylesheet" type="text/css">
+        <link href="http://fonts.googleapis.com/css?family=Open+Sans:400italic" rel="stylesheet" type="text/css">
+        <link href="http://fonts.googleapis.com/css?family=Open+Sans:600italic" rel="stylesheet" type="text/css">
+        <link href="http://fonts.googleapis.com/css?family=Open+Sans:700italic" rel="stylesheet" type="text/css">
+        <link href="http://fonts.googleapis.com/css?family=Open+Sans:300" rel="stylesheet" type="text/css">
+        <link href="http://fonts.googleapis.com/css?family=Open+Sans:400" rel="stylesheet" type="text/css">
+        <link href="http://fonts.googleapis.com/css?family=Open+Sans:600" rel="stylesheet" type="text/css">
+        <link href="http://fonts.googleapis.com/css?family=Bree+Serif:400" rel="stylesheet" type="text/css">
+    <![endif]-->
+        <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+        <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+</head>
+<body>
+    <header class="masthead">
+        <nav class="navbar navbar-inverse navbar--top">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                </div>
+                <div id="navbar" class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        <li><a href="../../index.html">Home</a></li>
+                        <li><a href="../../features.html">Features</a></li>
+                        <li class="active"><a href="../index.html">Documentation</a></li>
+                        <li><a href="../../examples/index.html">Examples</a></li>
+                        <li><a href="../../changelog.html">Changelog</a></li>
+                        <li><a href="https://github.com/manulaiko/alexya/releases">Downloads</a></li>
+                    </ul>
+                </div><!--/.navbar-collapse -->
+            </div>
+        </nav>
+        <div class="container">
+            <h1 class="font-bree-serif">Alexya Framework</h1>
+            <p class="font-open-sans-normal">The intelligent Loli Framework</p>
+        </div><!--end container-->
+    </header>
+    <div class="main-content">
+        <div class="container">
+            <div class="row" id="content">
+                <div class="span12">
+                    <section class="sec-header">
+                        <h3 class="font-bree-serif">Documentation <small>HMV(VM)C</small></h3>
+                        <div class="row">
+                            <div class="span3">
+                                <div class="well">
+                                    <ul class="nav nav-pills nav-stacked">
+                                        <li><a href="../configuration.html">Configuration</a></li>
+                                        <li><a href="index.html">HMV(VM)C</a></li>
+                                        <li>
+                                            <ul style="list-style: none; padding-top: 2px;">
+                                                <li style="background-color: #337ab7; color: #fff;"><a href="model.html" style="color: #fff;">The Model</a></li>
+                                                <li><a href="view.html">The View</a></li>
+                                                <li><a href="presenter.html">The Presenter (ViewModel)</a></li>
+                                                <li><a href="controller.html">The Controller</a></li>
+                                                <li><a href="triad.html">The Triad</a></li>
+                                            </ul>
+                                        </li>
+                                        <li><a href="../database/index.html">Database</a></li>
+                                        <li><a href="../dom.html">DOM generation</a></li>
+                                        <li><a href="../event_dispatcher.html">Event dispatcher</a></li>
+                                        <li><a href="../filesystem/index.html">File system</a></li>
+                                        <li><a href="../autoloader.html">Autoloader</a></li>
+                                        <li><a href="../http/index.html">HTTP</a></li>
+                                        <li><a href="../locale/index.html">Localization</a></li>
+                                        <li><a href="../router.html">Router</a></li>
+                                        <li><a href="../sockswork/index.html">SocksWork</a></li>
+                                        <li><a href="../ajax.html">Ajax</a></li>
+                                        <li><a href="../logger.html">Logger</a></li>
+                                        <li><a href="../security.html">Security</a></li>
+                                        <li><a href="../session.html">Session</a></li>
+                                        <li><a href="../results.html">Results</a></li>
+                                        <li><a href="../upload.html">File upload</a></li>
+                                        <li><a href="../validator.html">Validator</a></li>
+                                        <li><a href="../functions.html">Other functions</a></li>
+                                    </ul>
+                                </div><!--end well-->
+                            </div><!--end span3-->
+                            <div class="span9">
+                                <p>
+                                    The model represents the <i>M</i> in <i>MV(VM)C</i> and it contains the data that will be used to print the view. The class <i>\Alexya\Model</i> is the base class for all models of your application.<br/>
+                                </p>
+                                <p>
+                                    Method summary:<br/>
+                                    <table class="table table-bordered settings">
+                                    <thead>
+                                    <tr>
+                                        <td>Name</td>
+                                        <td>Parameters</td>
+                                        <td>Return value</td>
+                                        <td>Description</td>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td>onInstance</td>
+                                        <td></td>
+                                        <td>void</td>
+                                        <td>
+                                            This method is called when the model is instanced, instead of overriding the constructor you can override this method.
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                    </table>
+                                    Properties summary:<br/>
+                                    <table class="table table-bordered settings">
+                                    <thead>
+                                    <tr>
+                                        <td>Name</td>
+                                        <td>Type</td>
+                                        <td>Visibility</td>
+                                        <td>Description</td>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td>request</td>
+                                        <td><i>\Alexya\Http\Request</i></td>
+                                        <td>Public</td>
+                                        <td>
+                                            The request that was sent to instance the model.
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>triad</td>
+                                        <td><i>\Alexya\Triad</i></td>
+                                        <td>Public</td>
+                                        <td>
+                                            A reference to the <i>\Alexya\Triad</i> object that instanced the model.
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                    </table>
+                                </p>
+                                <p>
+                                    Model's function is fair eay as it only contains the data that the View will display:
+                                    <pre class="prettyprint">
+&lt;?php
+namespace Application\Model;
+
+use \Alexya\Model;
+
+/**
+ * Model for the 'User' page
+ *
+ * @author Manulaiko &lt;manulaiko@gmail.com&gt;
+ *
+ * @package \Application\Model
+ */
+class User extends Model
+{
+    /**
+     * User name
+     */
+    public $name = "";
+
+    /**
+     * User email
+     */
+    public $email = "";
+
+    /**
+     * User password
+     */
+    public $password = "";
+
+    /**
+     * Set data
+     */
+    public function onInstance()
+    {
+        $this->name     = "Test";
+        $this->email    = "test@test.test";
+        $this->password = "test";
+    }
+}</pre>
+                                </p>
+                            </div><!--end span9-->
+                        </div><!--end row-->
+                    </section>
+                </div><!--end span12-->
+            </div><!--end row-->
+        </div><!--end container-->
+    </div><!--end main-content-->
+    <footer>
+        <div class="container">
+            <div class="row">
+                <p>Alexya Framework - The intelligent Loli Framework by <a href="https://github.com/manulaiko" target="_blank">Manulaiko</a></p>
+            </div><!--end row-->
+        </div><!--end container-->
+    </footer>
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="../../js/jquery.min.js"></script>
+    <script src="../../js/bootstrap.min.js"></script>
+    <script src="../../js/prettify.js"></script>
+    <script type="text/javascript" src="../../js/respond.js"></script>
+    <script type="text/javascript">
+        $(function(){
+            //Load Goodle Code Pretiffy
+            window.prettyPrint && prettyPrint();
+            //Tab function
+            $('#pluginTab a').click(function (e) {
+                e.preventDefault();
+                $(this).tab('show');
+            });
+            //FAQ autosuggest
+            $('.typeahead').typeahead();
+            //tooltip init
+            $("a.tip").tooltip();
+            //footer link to got top
+            gotoTop();
+
+            function gotoTop(){
+                // scroll body to 0px on click
+                $('a#top').on('click',function () {
+                    $('body,html').animate({
+                        scrollTop: 0
+                    }, 800);
+                    return false;
+                });
+            };
+        });
+    </script>
+</body>
+</html>
